@@ -26,7 +26,8 @@ class MitamaeSetupperTest < Minitest::Test
   end
 
   def test_that_download_latest_mitamae_into_setup
-    assert false
+    ::MitamaeSetupper.run
+    assert File.executable?(@sandbox_path + "/setup/mitamae")
   end
 
   def test_that_create_node_yaml_into_setup
