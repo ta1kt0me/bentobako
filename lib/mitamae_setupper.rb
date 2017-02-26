@@ -17,6 +17,7 @@ module MitamaeSetupper
     RECIPES_PATH = SETUP_PATH + "/recipes"
 
     attr_accessor :options, :nodes
+    attr_reader :args
 
     def initialize(args)
       @args = args
@@ -117,7 +118,7 @@ end
         opt.on("--rails", "Enable to execute rails") { options[:rails] = true }
       end
 
-      opt_parser.parse!(@args)
+      opt_parser.parse!(args)
     end
   end
 end
