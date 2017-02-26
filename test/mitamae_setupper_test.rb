@@ -42,12 +42,11 @@ class MitamaeSetupperTest < Minitest::Test
     assert data[:user] == "James"
   end
 
-  def test_that_create_bootstrap_file_into_setup
-    assert false
-  end
-
   def test_that_use_homebrew_as_package_manager
-    assert false
+    ::MitamaeSetupper::Runner.new(["--homebrew"]).run
+    assert File.exist?(@sandbox_path + "/setup/bootstrap.rb")
+    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("require_recipe './recipes/homebrew.rb'\n")
+    assert File.open(@sandbox_path + "/setup/recipes/homebrew.rb").read.include?("Install Homebrew")
   end
 
   def test_that_setup_packages_for_rails
