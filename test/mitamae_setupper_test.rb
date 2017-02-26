@@ -20,6 +20,9 @@ class MitamaeSetupperTest < Minitest::Test
   def test_that_create_setup_directory
     ::MitamaeSetupper.run
     assert Dir.exist?(@sandbox_path + "/setup")
+
+    ::MitamaeSetupper.run
+    assert Dir.exist?(@sandbox_path + "/setup")
   end
 
   def test_that_download_latest_mitamae_into_setup

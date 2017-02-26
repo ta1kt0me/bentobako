@@ -1,8 +1,8 @@
 require "mitamae_setupper/version"
 
 module MitamaeSetupper
-  # Your code goes here...
+  SETUP_PATH = 'setup'
   def self.run
-    Dir.mkdir 'setup'
+    Dir.mkdir SETUP_PATH unless Dir.exist? SETUP_PATH
   end
 end
