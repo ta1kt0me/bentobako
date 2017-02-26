@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mitamae/setupper/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "mitamae-setupper"
+  spec.name          = "mitamae_setupper"
   spec.version       = Mitamae::Setupper::VERSION
   spec.authors       = ["ta1kt0me"]
   spec.email         = ["p.wadachi@gmail.com"]

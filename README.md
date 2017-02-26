@@ -7,7 +7,7 @@ Setup machine via `mitamae`.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mitamae-setupper'
+gem 'mitamae_setupper'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install mitamae-setupper
+    $ gem install mitamae_setupper
 
 ## Usage
 
@@ -32,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ta1kt0me/mitamae-setupper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ta1kt0me/mitamae_setupper.
 
 ## License
 
