@@ -11,7 +11,7 @@ module MitamaeSetupper
   class Runner
     SETUP_PATH = 'setup'
     MITAMAE_PATH = SETUP_PATH + "/mitamae"
-    LATEST_MITAMAE_URL = "https://github.com/k0kubun/mitamae/releases/latest"
+    LATEST_MITAMAE_URL = "https://github.com/k0kubun/mitamae/releases/download/v1.4.1/mitamae-x86_64-darwin"
     NODE_PATH = SETUP_PATH + "/node.yaml"
     BOOTSTRAP_PATH = SETUP_PATH + "/bootstrap.rb"
     RECIPES_PATH = SETUP_PATH + "/recipes"
@@ -46,7 +46,7 @@ module MitamaeSetupper
 
     def setup_node_config
       File.open(NODE_PATH, "wb") do |file|
-        file.write YAML.dump(build_nodes)
+        file.write ::YAML.dump(build_nodes)
       end
     end
 
