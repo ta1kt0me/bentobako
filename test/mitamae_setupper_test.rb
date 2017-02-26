@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'yaml'
 
 class MitamaeSetupperTest < Minitest::Test
   def setup
@@ -33,12 +34,12 @@ class MitamaeSetupperTest < Minitest::Test
     assert File.executable?(@sandbox_path + "/setup/mitamae")
   end
 
-  def test_that_create_node_yaml_into_setup
-    assert false
-  end
-
   def test_that_specify_user_into_node_user
-    assert false
+    ::MitamaeSetupper::Runner.new(["--user=James"]).run
+    assert File.exist?(@sandbox_path + "/setup/node.yaml")
+
+    data = YAML.load(File.new(@sandbox_path + "/setup/node.yaml").read)
+    assert data[:user] == "James"
   end
 
   def test_that_create_bootstrap_file_into_setup
