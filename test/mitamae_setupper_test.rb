@@ -44,15 +44,15 @@ class MitamaeSetupperTest < Minitest::Test
   def test_that_use_homebrew_as_package_manager
     ::MitamaeSetupper::Runner.new(["--homebrew"]).run
     assert File.exist?(@sandbox_path + "/setup/bootstrap.rb")
-    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("require_recipe './recipes/homebrew.rb'\n")
+    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("include_recipe './recipes/homebrew.rb'\n")
     assert File.open(@sandbox_path + "/setup/recipes/homebrew.rb").read.include?("Install Homebrew")
   end
 
   def test_that_setup_packages_for_rails
     ::MitamaeSetupper::Runner.new(["--rails"]).run
-    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("require_recipe './recipes/gems.rb'\n")
+    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("include_recipe './recipes/gems.rb'\n")
     assert File.open(@sandbox_path + "/setup/recipes/gems.rb").read.include?('gem_package')
-    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("require_recipe './recipes/packages.rb'\n")
+    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("include_recipe './recipes/packages.rb'\n")
     assert File.open(@sandbox_path + "/setup/recipes/packages.rb").read.include?('package')
     data = YAML.load(File.new(@sandbox_path + "/setup/node.yaml").read)
     assert data[:gems] == %w(bundler)

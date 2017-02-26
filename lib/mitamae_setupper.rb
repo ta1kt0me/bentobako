@@ -98,12 +98,12 @@ end
     def setup_bootstrap
       lines = ""
       if options.dig(:homebrew)
-        lines += "require_recipe './recipes/homebrew.rb'\n"
+        lines += "include_recipe './recipes/homebrew.rb'\n"
       end
 
       if options.dig(:rails)
-        lines += "require_recipe './recipes/packages.rb'\n"
-        lines += "require_recipe './recipes/gems.rb'\n"
+        lines += "include_recipe './recipes/packages.rb'\n"
+        lines += "include_recipe './recipes/gems.rb'\n"
       end
 
       File.open(BOOTSTRAP_PATH, "w") { |file| file.write lines }
