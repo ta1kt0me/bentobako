@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Mitamae::SetupperTest < Minitest::Test
+class MitamaeSetupperTest < Minitest::Test
   def setup
     @root_path = Dir.pwd
     @sandbox_path = @root_path + '/test/sandbox'
@@ -14,7 +14,7 @@ class Mitamae::SetupperTest < Minitest::Test
   end
 
   def test_that_it_has_a_version_number
-    refute_nil ::Mitamae::Setupper::VERSION
+    refute_nil ::MitamaeSetupper::VERSION
   end
 
   def test_that_create_setup_directory

@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require "irb"
-require 'mitamae/setupper'
+require 'mitamae_setupper'
 
 require 'minitest/autorun'
