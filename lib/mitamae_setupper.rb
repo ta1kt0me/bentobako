@@ -15,17 +15,19 @@ module MitamaeSetupper
     BOOTSTRAP_PATH = SETUP_PATH + "/bootstrap.rb"
     RECIPES_PATH = SETUP_PATH + "/recipes"
 
-    attr_accessor :options
+    attr_accessor :options, :nodes
 
     def initialize(args)
       @args = args
       @options = {}
+      @nodes = {}
     end
 
     def run
       Dir.mkdir SETUP_PATH unless Dir.exist? SETUP_PATH
       Dir.mkdir RECIPES_PATH unless Dir.exist? RECIPES_PATH
       setup_mitamae
+      parse_options
       setup_node_config
       setup_bootstrap
       setup_recipes
@@ -42,10 +44,15 @@ module MitamaeSetupper
     end
 
     def setup_node_config
-      parse_options
       File.open(NODE_PATH, "wb") do |file|
-        file.write YAML.dump(options)
+        file.write YAML.dump(build_nodes)
       end
+    end
+
+    def build_nodes
+      nodes.merge!(user: options[:user]) if options.dig(:user)
+      nodes.merge!(packages: %w(git ruby), gems: %w(bundler)) if options.dig(:rails)
+      nodes
     end
 
     def setup_recipes
@@ -60,13 +67,45 @@ end
           file.write(content)
         end
       end
+
+      if options.dig(:rails)
+        File.open(RECIPES_PATH + '/packages.rb', 'w') do |file|
+          file.write(
+            <<-EOF
+node[:packages].each do |item|
+  package item
+end
+            EOF
+          )
+        end
+
+        File.open(RECIPES_PATH + '/gems.rb', 'w') do |file|
+          file.write(
+            <<-EOF
+node[:gems].each do |gem|
+  gem_package gem do
+    user node[:user]
+  end
+end
+            EOF
+          )
+        end
+
+      end
     end
 
     def setup_bootstrap
-      lines = "require_recipe './recipes/homebrew.rb'\n" if options.dig(:homebrew)
-      File.open(BOOTSTRAP_PATH, "w") do |file|
-        file.write lines
+      lines = ""
+      if options.dig(:homebrew)
+        lines += "require_recipe './recipes/homebrew.rb'\n"
       end
+
+      if options.dig(:rails)
+        lines += "require_recipe './recipes/packages.rb'\n"
+        lines += "require_recipe './recipes/gems.rb'\n"
+      end
+
+      File.open(BOOTSTRAP_PATH, "w") { |file| file.write lines }
     end
 
     def parse_options
@@ -74,6 +113,7 @@ end
         opt.banner = "Usage: mitamae_wrapper [options]"
         opt.on("--user=NAME", "executor user name")  { |user| options[:user] = user }
         opt.on("--homebrew", "Use homebrew as package manager") { options[:homebrew] = true }
+        opt.on("--rails", "Enable to execute rails") { options[:rails] = true }
       end
 
       opt_parser.parse!(@args)

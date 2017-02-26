@@ -50,6 +50,13 @@ class MitamaeSetupperTest < Minitest::Test
   end
 
   def test_that_setup_packages_for_rails
-    assert false
+    ::MitamaeSetupper::Runner.new(["--rails"]).run
+    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("require_recipe './recipes/gems.rb'\n")
+    assert File.open(@sandbox_path + "/setup/recipes/gems.rb").read.include?('gem_package')
+    assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("require_recipe './recipes/packages.rb'\n")
+    assert File.open(@sandbox_path + "/setup/recipes/packages.rb").read.include?('package')
+    data = YAML.load(File.new(@sandbox_path + "/setup/node.yaml").read)
+    assert data[:gems] == %w(bundler)
+    assert data[:packages].sort == %w(git ruby).sort
   end
 end
