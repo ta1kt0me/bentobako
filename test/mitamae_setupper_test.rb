@@ -6,6 +6,9 @@ class MitamaeSetupperTest < Minitest::Test
     @sandbox_path = @root_path + '/test/sandbox'
     Dir.mkdir @sandbox_path
     Dir.chdir @sandbox_path
+
+    stub_request(:get, MitamaeSetupper::Runner::LATEST_MITAMAE_URL)
+      .to_return(body: File.new(@root_path + "/test/fixtures/sample.bin"), status: 200)
   end
 
   def teardown
