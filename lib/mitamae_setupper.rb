@@ -16,13 +16,12 @@ module MitamaeSetupper
     BOOTSTRAP_PATH = SETUP_PATH + "/bootstrap.rb"
     RECIPES_PATH = SETUP_PATH + "/recipes"
 
-    attr_accessor :options, :nodes
+    attr_accessor :options
     attr_reader :args
 
     def initialize(args)
       @args = args
       @options = {}
-      @nodes = {}
     end
 
     def run
@@ -52,6 +51,7 @@ module MitamaeSetupper
     end
 
     def build_nodes
+      nodes = {}
       nodes.merge!("user" => options[:user]) if options.dig(:user)
       nodes.merge!("packages" => %w(git ruby), "gems" => %w(bundler)) if options.dig(:rails)
       nodes
