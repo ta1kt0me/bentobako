@@ -1,9 +1,9 @@
-require "mitamae_setupper/version"
+require "bentobako/version"
 require "open-uri"
 require "optparse"
 require "yaml"
 
-module MitamaeSetupper
+module Bentobako
   def self.run
     Runner.new(ARGV).run
   end
@@ -112,7 +112,7 @@ end
 
     def parse_options
       opt_parser = OptionParser.new do |opt|
-        opt.banner = "Usage: mitamae_wrapper [options]"
+        opt.banner = "Usage: bentobako [options]"
         opt.on("--user=NAME", "REQUIRED: Specify user name for execution")  { |user| options[:user] = user }
         opt.on("--homebrew", "Use homebrew as package manager") { options[:homebrew] = true }
         opt.on("--rails", "Enable to execute rails") { options[:rails] = true }

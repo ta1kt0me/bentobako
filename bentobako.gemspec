@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mitamae_setupper/version'
+require 'bentobako/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "mitamae_setupper"
-  spec.version       = MitamaeSetupper::VERSION
+  spec.name          = "bentobako"
+  spec.version       = Bentobako::VERSION
   spec.authors       = ["ta1kt0me"]
   spec.email         = ["p.wadachi@gmail.com"]
 

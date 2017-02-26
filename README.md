@@ -1,4 +1,4 @@
-# Mitamae::Setupper
+# Bentobako
 
 Setup machine via `mitamae`.
 
@@ -7,7 +7,7 @@ Setup machine via `mitamae`.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mitamae_setupper'
+gem 'bentobako'
 ```
 
 And then execute:
@@ -16,12 +16,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install mitamae_setupper
+    $ gem install bentobako
 
 ## Usage
 
 ```
-$ mitame-setupper --homebrew --rails --user=ta1kt0me
+$ bentobako --homebrew --rails --user=ta1kt0me
 ```
 
 ## Development
@@ -32,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ta1kt0me/mitamae_setupper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ta1kt0me/bentobako.
 
 ## License
 
