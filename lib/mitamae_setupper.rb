@@ -113,12 +113,15 @@ end
     def parse_options
       opt_parser = OptionParser.new do |opt|
         opt.banner = "Usage: mitamae_wrapper [options]"
-        opt.on("--user=NAME", "executor user name")  { |user| options[:user] = user }
+        opt.on("--user=NAME", "REQUIRED: Specify user name for execution")  { |user| options[:user] = user }
         opt.on("--homebrew", "Use homebrew as package manager") { options[:homebrew] = true }
         opt.on("--rails", "Enable to execute rails") { options[:rails] = true }
       end
 
       opt_parser.parse!(args)
+
+      ## TODO: show help and error
+      # raise OptionParser::MissingArgument if options[:user].nil?
     end
   end
 end
