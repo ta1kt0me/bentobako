@@ -1,6 +1,7 @@
 require "mitamae_setupper/version"
 require "open-uri"
 require "optparse"
+require "yaml"
 
 module MitamaeSetupper
   def self.run
