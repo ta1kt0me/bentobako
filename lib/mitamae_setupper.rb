@@ -51,8 +51,8 @@ module MitamaeSetupper
     end
 
     def build_nodes
-      nodes.merge!(user: options[:user]) if options.dig(:user)
-      nodes.merge!(packages: %w(git ruby), gems: %w(bundler)) if options.dig(:rails)
+      nodes.merge!("user" => options[:user]) if options.dig(:user)
+      nodes.merge!("packages" => %w(git ruby), "gems" => %w(bundler)) if options.dig(:rails)
       nodes
     end
 

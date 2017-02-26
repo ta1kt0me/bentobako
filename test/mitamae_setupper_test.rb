@@ -38,7 +38,7 @@ class MitamaeSetupperTest < Minitest::Test
     assert File.exist?(@sandbox_path + "/setup/node.yaml")
 
     data = YAML.load(File.new(@sandbox_path + "/setup/node.yaml").read)
-    assert data[:user] == "James"
+    assert data["user"] == "James"
   end
 
   def test_that_use_homebrew_as_package_manager
@@ -55,7 +55,7 @@ class MitamaeSetupperTest < Minitest::Test
     assert File.open(@sandbox_path + "/setup/bootstrap.rb").read.include?("include_recipe './recipes/packages.rb'\n")
     assert File.open(@sandbox_path + "/setup/recipes/packages.rb").read.include?('package')
     data = YAML.load(File.new(@sandbox_path + "/setup/node.yaml").read)
-    assert data[:gems] == %w(bundler)
-    assert data[:packages].sort == %w(git ruby).sort
+    assert data["gems"] == %w(bundler)
+    assert data["packages"].sort == %w(git ruby).sort
   end
 end
